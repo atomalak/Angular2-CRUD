@@ -1,0 +1,49 @@
+<div class="container">
+  <h4 class="page-header text-center">
+    Film Listesi
+  </h4>
+  <app-added-form  [retrieveIndex]="selectedIndex"></app-added-form>
+  <form>
+    <div class="form-group">
+      <input class="form-control" placeholder="Film Arama..." name="moviesearch" [(ngModel)]="movieSearch" />
+    </div>
+  </form>
+  <div class="alert alert-danger" *ngIf="movies.length==0">
+    Film Listesi Boştur
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col col-sm-2">
+          <h5>Film Ismi</h5>
+        </div>
+        <div class="col col-sm-2">
+          <h5>Film Yapım Yılı</h5>
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item" *ngFor="let movie of movies | searchmovie : movieSearch  let i=index">
+      <div class="row text-center">
+        <div class="col col-sm-2" >
+          {{movie.name}}
+        </div>
+        <div class="col col-sm-2">
+          {{movie.year}}
+        </div>
+        <div class="col col-sm-2">
+          <a class="btn btn-xs btn-danger" (click)="removeItem(i)">
+            Sil
+          </a>
+         
+        </div>
+        <div class="col col-sm-2">
+            <a class="btn btn-xs btn-primary" (click)="updateRow(i,movie)">
+                Güncelle
+              </a>
+        </div>
+
+      </div>
+    </li>
+  </ul>
+
+</div>
